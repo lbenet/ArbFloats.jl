@@ -12,7 +12,7 @@ function package_directory(pkgName::String)
     pkgdir = Base.find_package(pkgName)
     nothing == pkgdir && throw(ErrorException(noNemo))
     return abspath(joinpath(split(pkgdir, pkgName)[1], pkgName))
-end    
+end
 
 function library_filepath(libsdir::String, filenames::Vector{String}, libname::String)
     libfile = filenames[ findfirst([startswith(x,libname) for x in filenames]) ]
