@@ -67,5 +67,16 @@ mutable struct ArbFloat{P} <: AbstractFloat
 end
 
 function c_release_arb(x::ArbFloat{P}) where {P}
-  ccall(@libarb(arb_clear), Void, (Ref{ArbFloat{P}},), x)
+    ccall(@libarb(arb_clear), Void, (Ref{ArbFloat{P}},), x)
 end
+
+    #       P is the precision in bits as a parameter
+    #
+mutable struct ArbComplex{P} <: Complex
+    re::ArbFloat{P}
+    im::ArbFloat{P}
+end
+
+function c_release_acb(x::ArbComplex{P}) where {P}
+    ccall(@libarb(acb_clear), Void, (Ref{ArbComplex{P}},), x)
+end    
